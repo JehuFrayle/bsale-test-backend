@@ -8,11 +8,21 @@ const router = express.Router();
 const service = new ProductsService();
 
 router.get('/', async (req, res, next) => {
-  try {
-    const products = await service.find();
-    res.json(products);
-  } catch (error) {
-    next(error);
+  const { search } = req.query;
+  if (search) {
+    try {
+      const products = await service.findByName(search);
+      res.json(products);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    try {
+      const products = await service.find();
+      res.json(products);
+    } catch (error) {
+      next(error);
+    }
   }
 });
 

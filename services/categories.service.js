@@ -27,6 +27,15 @@ class CategoryService {
             });
         }); 
     }
+    findByName(name){
+        const search = name.replaceAll('+','%');
+        return new Promise((resolve, reject) =>{
+            pool.query(`SELECT * FROM category WHERE name LIKE("%${search}%")`, (err, rows, fields) => {
+                if(err) reject(err);
+                resolve(rows);
+            })
+        })
+    }
 
 }
 

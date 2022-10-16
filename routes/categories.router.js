@@ -8,11 +8,21 @@ const router = express.Router();
 const service = new CategoryService();
 
 router.get('/', async (req, res, next) => {
-  try {
-    const categories = await service.find();
-    res.json(categories);
-  } catch (error) {
-    next(error);
+  const { search } = req.query;
+  if (search) {
+    try {
+      const categories = await service.findByName(search);
+      res.json(categories);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    try {
+      const categories = await service.find();
+      res.json(categories);
+    } catch (error) {
+      next(error);
+    }
   }
 });
 
