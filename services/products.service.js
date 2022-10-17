@@ -28,7 +28,7 @@ class ProductsService {
         })
     }
     findByName(name){
-        const search = name.replaceAll('+','%');
+        const search = name.replace(/'+'/g,'%');
         return new Promise((resolve, reject) =>{
             pool.query(`SELECT * FROM product WHERE name LIKE("%${search}%")`, (err, rows, fields) => {
                 if(err) reject(err);
