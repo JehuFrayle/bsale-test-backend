@@ -31,7 +31,7 @@ router.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const category = await service.findOne(id);
+      const category = await service.findProductsByCategory(id);
       res.json(category);
     } catch (error) {
       next(error);

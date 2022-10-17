@@ -36,6 +36,14 @@ class CategoryService {
             })
         })
     }
+    findProductsByCategory(catID){
+        return new Promise((resolve, reject) => {
+            pool.query(`SELECT * FROM product WHERE category = ${catID}`, (err, rows, fields) => {
+                if(err) reject(err);
+                resolve(rows);
+            })
+        })
+    }
 
 }
 
