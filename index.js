@@ -19,7 +19,7 @@ const options = {
     }
   }
 }
-//app.use(cors(options)); NO CORS
+app.use(cors(options)); NO CORS
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
